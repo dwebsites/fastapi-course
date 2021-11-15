@@ -52,9 +52,9 @@ def find_index_post(id):
         if p['id'] == id:
             return i
 
-app.include_router(user.router)
-app.include_router(post.router)
 
+app.include_router(post.router)
+app.include_router(user.router)
 
 @app.get("/")
 def root():
