@@ -11,8 +11,7 @@ SQLALCHEMY_DATABASE_URL = f"postgresql://{settings.database_username}:{settings.
 
 #SQLALCHEMY_DATABASE_URL = f"{settings.database_url}"
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL,
-  connect_args={"sslmode": "require"})
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
