@@ -4,6 +4,7 @@ from jose import JWSError, jwt
 from datetime import date, datetime, timedelta
 from fastapi.security import OAuth2PasswordBearer
 from jose.exceptions import JWTError
+from .config import settings
 
 from app import models
 from . import schemas, database
@@ -14,9 +15,9 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl='login')
 #algorithm
 #expiration time
 
-SECRET_KEY = 'Shut1_Upload_Fineness'
-ALGORITHM = 'HS256'
-ACCESS_TOKEN_EXPIRE_MINUTES = 60
+SECRET_KEY = settings.secret_key
+ALGORITHM = settings.algorithm
+ACCESS_TOKEN_EXPIRE_MINUTES = settings.access_token_expire_minutes
 
 def create_access_token(data: dict):
     to_encode = data.copy()
