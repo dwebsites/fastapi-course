@@ -1,5 +1,3 @@
-.venv
-venv
-*.pyc
-__init__.py
+venv/
 .env
+__pycache__
