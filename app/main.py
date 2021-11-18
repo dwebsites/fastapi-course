@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, status
 from . import models
 from .database import engine
 from .routers import user, post, auth, vote
@@ -31,4 +31,4 @@ app.include_router(vote.router)
 
 @app.get("/")
 def root():
-    return {"message": "Welcome to my api!!!!!!!!!"}
+    return {"message": "Hello World"}
