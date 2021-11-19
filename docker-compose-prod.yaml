@@ -1,13 +1,15 @@
 version: '3'
 services:
   api:
-    image: donko/fastapi:0.0.1
+    image: donko/fastapi:0.0.2
     depends_on:
       - postgres
     ports:
       - 80:8000
     volumes:
       - ./:/usr/src/app:ro
+    # Run command to create database schema
+    #docker-compose -f docker-compose-prod.yaml run  --rm api alembic upgrade head
     #command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     # env_file:
     #     - ./.env
@@ -23,8 +25,8 @@ services:
   postgres:
     image: postgres
     environment:
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_NAME}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
     volumes:
       - postgres-db:/var/lib/postgresql/data
 volumes:
