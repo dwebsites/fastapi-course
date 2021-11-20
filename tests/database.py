@@ -35,8 +35,9 @@ Base.metadata.create_all(bind=engine)
 
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture()
 def session():
+    print("my session fixure ran")
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
     db = TestingSessionLocal()
@@ -46,13 +47,3 @@ def session():
         db.close()
 
 
-@pytest.fixture(scope="module")   
-def client(session):
-    def overrride_get_db():
-        db = TestingSessionLocal()
-        try:
-            yield session
-        finally:
-            session.close()
-    app.dependency_overrides[get_db] = overrride_get_db
-    yield TestClient(app)
